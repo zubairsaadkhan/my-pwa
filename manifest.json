@@ -1,10 +1,4 @@
 {
-  "name": "My Ready App",
-  "short_name": "My App",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
   "icons": [
     {
       "src": "icon-192.png",
