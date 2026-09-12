@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Web App</title>
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- iOS / Safari Support -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="My App">
+  <link rel="apple-touch-icon" href="icon-192.png">
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    .card {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      max-width: 400px;
+      width: 100%;
+    }
+    .status {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      background: #22c55e;
+      color: #000;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>App Ready</h1>
+    <p>This web page functions as an offline-capable Progressive Web App.</p>
+    <div id="status" class="status">Checking Service Worker...</div>
+  </div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(() => {
+            document.getElementById('status').innerText = 'PWA Active & Ready Offline';
+          })
+          .catch(err => {
+            document.getElementById('status').innerText = 'Service Worker Failed';
+            document.getElementById('status').style.background = '#ef4444';
+            console.error('SW Error:', err);
+          });
+      });
+    }
+  </script>
+</body>
+</html>
